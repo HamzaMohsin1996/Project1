@@ -1,0 +1,86 @@
+.main-wrapper video{
+    width: 100%;
+    height: calc(100vh - 0px);
+}
+.main-screen-wrapper .card-wrapper{
+    height: 200px;
+    background-size: cover;
+    border-radius:20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+.main-screen-wrapper .card-wrapper .custom-primary-btn{
+    background: green;
+    color: white;
+    border: 2px solid yellow;
+    border-radius: 10px;
+    font-size: 28px;
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    opacity: 0;
+    text-decoration: none;
+}
+.main-screen-wrapper .card-wrapper:hover .custom-primary-btn{
+    opacity: 1;
+    cursor: pointer;
+}
+.main-screen-wrapper .card-wrapper.error-occured .custom-primary-btn{
+    opacity: 1;
+    background: red;
+}
+.custom-modal-primary video{
+    width: 100%;
+    height: 100%;
+}
+.custom-modal-primary .modal-content{
+    position: relative;
+    padding: 0;
+}
+.custom-modal-primary{
+    border-radius: 20px;
+}
+.custom-modal-primary .modal-body{
+    padding: 0;
+}
+.custom-close-btn{
+    width: 30px;
+    height: 30px;
+    background: white;
+    color: #005a9b;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 1; 
+
+}
+.custom-close-btn span{
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: -10px;
+    position: relative;
+}
+.custom-modal-primary .modal-footer {
+    border: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.custom-modal-primary .modal-content{
+    background-color: transparent;
+    border: none;
+}
+.custom-btn{
+    min-width: 120px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+}
+.blue-btn{
+    background: #005a9b;
+    color: #fff;
+}
