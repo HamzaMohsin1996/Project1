@@ -28,8 +28,8 @@
                     <div class="container-fluid">
                         <div class="row gy-4">
                             <div class="col-sm-12">
-                                <div class="row">
-                                    <div class="col-md-7">
+                                <div class="row g-4">
+                                    <div class="col-lg-7">
                                         <div class="card-wrapper-bg-grey">
                                             <div class="card-wrapper-bg-inner">
                                                 <img src="./Assets/images/car-icon.svg" alt="Car Icon">
@@ -44,7 +44,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-lg-5">
                                         <div class="card-wrapper-bg-grey">
                                             <div class="card-wrapper-bg-inner">
                                                 <img src="./Assets/images/user-img-icon.svg" alt="Car Icon">
@@ -69,8 +69,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="custom-card-black">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 custom-container-width">
+                                <button class="custom-card-black custom-modal-btn" data-toggle="modal" data-target="#vehicle-view-popups">
                                     <div class="text-wrapper">
                                         <div class="vehicle-status-wrapper">
                                             <div class="green-icon-wrapper">
@@ -91,10 +91,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </button>
                             </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="custom-card-black">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 custom-container-width">
+                                <a href="./home.html"  class="custom-card-black">
                                     <!-- <div class="text-wrapper">
                                         <div class="vehicle-status-wrapper">
                                             <div class="green-icon-wrapper">
@@ -121,10 +121,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="custom-card-black">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 custom-container-width">
+                                <button class="custom-card-black custom-modal-btn" data-toggle="modal" data-target="#vehicle-view-popups">
                                     <div class="text-wrapper">
                                         <div class="vehicle-status-wrapper">
                                             <div class="green-icon-wrapper">
@@ -145,10 +145,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </button>
                             </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="custom-card-black">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 custom-container-width">
+                                <button class="custom-card-black custom-modal-btn" data-toggle="modal" data-target="#vehicle-view-popups">
                                     <div class="text-wrapper">
                                         <div class="vehicle-status-wrapper">
                                             <div class="green-icon-wrapper">
@@ -169,10 +169,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </button>
                             </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="custom-card-black">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 custom-container-width">
+                                <button class="custom-card-black custom-modal-btn" data-toggle="modal" data-target="#vehicle-view-popups">
                                     <div class="text-wrapper">
                                         <div class="vehicle-status-wrapper">
                                             <div class="green-icon-wrapper">
@@ -193,10 +193,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </button>
                             </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="custom-card-black">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 custom-container-width">
+                                <button class="custom-card-black custom-modal-btn" data-toggle="modal" data-target="#vehicle-view-popups">
                                     <div class="text-wrapper">
                                         <div class="vehicle-status-wrapper">
                                             <div class="green-icon-wrapper">
@@ -217,7 +217,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </button>
                             </div>
                             <!-- <div class="col-md-12 py-3">
                                 <h2 class="text-center">Teleoperation Workplace</h2>
@@ -268,21 +268,21 @@
             </div>
   </div>
 
-  <div class="modal fade custom-modal-primary" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade custom-modal-primary" id="vehicle-view-popup" tabindex="-1" role="dialog" aria-labelledby="vehicle-view-popupLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
-          <!-- <button type="button" class="close custom-close-btn" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close custom-close-btn close-popup-btn" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button> -->
+          </button>
         <div class="modal-body">
-            <video  autoplay controls>
+            <video  autoplay >
                 <source src="./Assets/images/front-view.mp4" type="video/mp4">
                 <source src="./Assets/images/front-view.mp4" type="video/ogg">
                 Your browser does not support the video tag.
               </video>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary custom-btn"  data-dismiss="modal" aria-label="close">Close</button>
+          <button type="button" class="btn btn-secondary custom-btn close-popup-btn"  data-dismiss="modal" aria-label="close">Close</button>
           <a href="./inside-view.html" type="button" class="btn btn-primary custom-btn blue-btn">Take Control</a>
         </div>
       </div>
