@@ -22,14 +22,40 @@
 </head>
 
 <body class="p-4">
-  <div class="main-wrapper">
-    <video autoplay  pause>
-      <source src="./Assets/images/front-view.mp4" type="video/mp4">
-      <source src="./Assets/images/front-view.mp4" type="video/ogg">
-       Your browser does not support the video tag.
-    </video>
-  </div>
-
+    <div class="main-wrapper">
+        <div class="custom-video-wrapper">
+          <video id="videoPlayer" controls autoplay>
+            <source src="./Assets/images/front-view.mp4" type="video/mp4">
+            <source src="./Assets/images/front-view.mp4" type="video/ogg">
+            Your browser does not support the video tag.
+          </video>
+    
+         <div class="emergency-btns-wrapper" id="videoButtons" style="display: none;">
+  <button class="custom-btn blue-btn" id="leftBtn"><i class="fa fa-arrow-left"></i></button>
+  <button class="custom-btn blue-btn" id="upBtn"><i class="fa fa-arrow-up"></i></button>
+  <button class="custom-btn blue-btn" id="rightBtn"><i class="fa fa-arrow-right"></i></button>
+</div>
+          
+          <div id="timer" style="display: none;">
+            <span class="timer" id="timeElapsed">00:00:00</span>
+            <div id="timeDisplay" style="display: none;">Elapsed Time: 
+                <span id="elapsedTimeDisplay">0</span>
+            </div>
+            </div>
+          <table id="timeTable" style="display: none;">
+            <thead>
+              <tr>
+                <th>Video</th>
+                <th>Elapsed Time</th>
+              </tr>
+            </thead>
+            <tbody id="timeTableBody">
+              <!-- Time records will be added here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
