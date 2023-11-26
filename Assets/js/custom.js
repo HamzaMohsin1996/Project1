@@ -107,15 +107,15 @@ function playVideo(videoSrc) {
 
 
 function playLeftVideo() {
-  playVideo('./Assets/images/bus-inside-view.mp4');
+  playVideo('https://ia601206.us.archive.org/18/items/bus-inside-view/bus-inside-view.mp4');
 }
 
 function playFrontVideo() {
-  playVideo('./Assets/images/front-view.mp4');
+  playVideo('https://ia601502.us.archive.org/31/items/front-view_202311/front-view.mp4');
 }
 
 function playThirdVideo() {
-  playVideo('./Assets/images/bus-inner-view.mp4');
+  playVideo('https://ia601202.us.archive.org/35/items/bus-inner-view/bus-inner-view.mp4');
 }
 
 // Function to stop timer and add time record when any button inside videoButtons is clicked

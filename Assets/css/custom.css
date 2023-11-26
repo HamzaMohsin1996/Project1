@@ -91,6 +91,7 @@ button,a{
     min-width: 120px;
     border-radius: 10px;
     border: 1px solid transparent;
+    padding: 15px;
 }
 .blue-btn{
     background: #005a9b;
@@ -221,7 +222,7 @@ button,a{
 }
 .custom-btn.blue-btn{
     min-width: auto;
-    padding: 15px;
+   
     margin-left: 15px;
 }
 #timer{
