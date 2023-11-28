@@ -12,6 +12,7 @@ button,a{
 .main-wrapper video{
     width: 100%;
     height: calc(100vh - 60px);
+    object-fit: cover; 
 }
 .main-screen-wrapper .card-wrapper{
     height: 200px;
@@ -307,8 +308,33 @@ button,a{
     #timeTable th {
       background-color: #f2f2f2;
     }
+    .custom-video-wrapper{
+        position: relative;
+    }
+    .back-view-wrapper{
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px; /* Adjust width as needed */
+        height: 80px; /* Adjust height as needed */
+        /* background-color: #ccc; */
+        border: 5px solid black;
+        border-radius: 20px;
+    }
+    .back-view-wrapper video{
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        border-radius: 16px;
+    }
+    /* video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-pause-button,
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-fullscreen-button {
+ display: none;
+} */
 
-   
 @media screen and (max-width:1600px) and (min-width:1199px){
     .custom-container-width{
         width: 33.33%;

@@ -24,18 +24,24 @@
 <body class="p-4">
     <div class="main-wrapper">
         <div class="custom-video-wrapper">
-          <video id="videoPlayer" controls autoplay>
+          <video id="videoPlayer"  autoplay muted>
             <source src="https://ia601502.us.archive.org/31/items/front-view_202311/front-view.mp4" type="video/mp4">
             <source src="https://ia601502.us.archive.org/31/items/front-view_202311/front-view.mp4" type="video/ogg">
             Your browser does not support the video tag.
           </video>
     
          <div class="emergency-btns-wrapper" id="videoButtons" style="display: none;">
-  <button class="custom-btn blue-btn" id="leftBtn"><i class="fa fa-arrow-left"></i></button>
-  <button class="custom-btn blue-btn" id="upBtn"><i class="fa fa-arrow-up"></i></button>
-  <button class="custom-btn blue-btn" id="rightBtn"><i class="fa fa-arrow-right"></i></button>
-</div>
-          
+          <button class="custom-btn blue-btn" id="leftBtn" onclick="playLeftVideo()"><i class="fa fa-arrow-left"></i></button>
+          <button class="custom-btn blue-btn" id="upBtn" onclick="playFrontVideo()"><i class="fa fa-arrow-up"></i></button>
+          <button class="custom-btn blue-btn" id="rightBtn" onclick="playThirdVideo()"><i class="fa fa-arrow-right"></i></button>
+        </div>
+            <!-- <div class="back-view-wrapper">
+              <video id="secondVideo"  autoplay muted>
+                <source src="https://ia601202.us.archive.org/35/items/bus-inner-view/bus-inner-view.mp4" type="video/mp4">
+                <source src="https://ia601202.us.archive.org/35/items/bus-inner-view/bus-inner-view.mp4" type="video/ogg">
+                Your browser does not support the video tag.
+              </video>
+            </div> -->
           <div id="timer" style="display: none;">
             <span class="timer" id="timeElapsed">00:00:00</span>
             <div id="timeDisplay" style="display: none;">Elapsed Time: 
