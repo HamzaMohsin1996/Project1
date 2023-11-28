@@ -328,6 +328,52 @@ button,a{
         object-fit: cover; 
         border-radius: 16px;
     }
+    .speed-limit-wrapper{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: white;
+        padding: 2px;
+        border-radius: 5px;
+        max-width: 80px;
+    }
+    .speed-limit-wrapper-inner{
+        border-radius: 10px;
+        border: 2px solid black;
+        padding: 5px;
+        text-align: center;
+    }
+    .speed-limit-wrapper-inner p{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .speed-limit-wrapper-inner span{
+        font-weight: 700;
+        font-size: 32px;
+        display: inline-block;
+    }
+    .caution-wrapper{
+        position: absolute;
+        top: 10px;
+        right: 30px;
+        background: white;
+        border: 4px solid red;
+        border-radius: 5px;
+        padding: 10px  15px;
+        animation: heartbeat 1.5s infinite;
+        /* max-width: 250px; */
+    }
+    .caution-wrapper-inner{
+        display: flex;
+        align-items: center;
+    }
+    .caution-wrapper-inner p{
+        margin-left: 10px;
+        font-weight: 600;
+    }
+    .caution-wrapper-inner img{
+        max-width: 30px;
+    }
     /* video::-webkit-media-controls-play-button,
 video::-webkit-media-controls-pause-button,
 video::-webkit-media-controls-mute-button,
