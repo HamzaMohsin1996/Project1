@@ -25,6 +25,11 @@ let pauseDuration = 5; // Default pause duration in seconds
 
 let timerInterval;
 let startTime;
+video.muted = false; // Unmute the video after page load (this might not work in all browsers)
+
+video.oncanplaythrough = () => {
+  video.play(); // Start playing the video when it's ready
+};
 
 function startTimer() {
     startTime = Date.now();
@@ -64,7 +69,7 @@ function updateFlipClock(time) {
 
 video.addEventListener('timeupdate', function () {
   const currentTime = video.currentTime;
-  if (currentTime >= 5) {
+  if (currentTime >= 8) {
     video.pause();
     videoButtons.style.display = 'block'; // Display control buttons at 5 seconds
     startTimer(); // Start the timer when video pauses at 5 seconds
@@ -99,9 +104,9 @@ function playVideo(videoSrc) {
   let pauseDuration;
 
   // Set the pause duration based on the video source
-  if (videoSrc.includes('bus-inside-view')) {
+  if (videoSrc.includes('1.AmbulanceMoveLeft-Audio')) {
     pauseDuration = 10; // Pause duration for 'bus-inside-view' video is 10 seconds
-  } else if (videoSrc.includes('front-view')) {
+  } else if (videoSrc.includes('2.AmbulancePass-Audio')) {
     pauseDuration = 50; // Pause duration for 'front-view' video is 50 seconds
   } else {
     pauseDuration = 20; // Default pause duration for other videos
@@ -134,16 +139,16 @@ function playVideo(videoSrc) {
 }
 
 function playLeftVideo() {
-  playVideo('https://ia601206.us.archive.org/18/items/bus-inside-view/bus-inside-view.mp4');
+  playVideo('https://ia600500.us.archive.org/28/items/2.-ambulance-pass-audio/2.AmbulancePass-Audio.mp4');
 }
 
 function playFrontVideo() {
-  playVideo('https://ia601502.us.archive.org/31/items/front-view_202311/front-view.mp4');
+  playVideo('https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4');
 }
 
-function playThirdVideo() {
-  playVideo('https://ia601202.us.archive.org/35/items/bus-inner-view/bus-inner-view.mp4');
-}
+// function playThirdVideo() {
+//   playVideo('https://ia601202.us.archive.org/35/items/bus-inner-view/bus-inner-view.mp4');
+// }
 
 // Function to stop timer and add time record when any button inside videoButtons is clicked
 videoButtons.addEventListener('click', function (event) {
@@ -158,9 +163,10 @@ function handleButtonClick(event) {
       playLeftVideo();
     } else if (event.target.id === 'frontButton') {
       playFrontVideo();
-    } else if (event.target.id === 'rightButton') {
-      playThirdVideo();
-    }
+    } 
+    // else if (event.target.id === 'rightButton') {
+    //   playThirdVideo();
+    // }
   }
 }
 function handleMouseHover(event) {
@@ -171,10 +177,11 @@ function handleMouseHover(event) {
     } else if (event.target.id === 'frontButton') {
       // Handle mouse hover on front button
       // For example: Show some tooltip or perform some action
-    } else if (event.target.id === 'rightButton') {
-      // Handle mouse hover on right button
-      // For example: Show some tooltip or perform some action
-    }
+    } 
+    // else if (event.target.id === 'rightButton') {
+    //   // Handle mouse hover on right button
+    //   // For example: Show some tooltip or perform some action
+    // }
   }
 }
 
@@ -187,8 +194,9 @@ document.addEventListener('keydown', function (event) {
     playLeftVideo();
   } else if (event.code === 'ArrowUp') {
     playFrontVideo();
-  } else if (event.code === 'ArrowRight') {
-    playThirdVideo();
-  }
+  } 
+  // else if (event.code === 'ArrowRight') {
+  //   playThirdVideo();
+  // }
 });
 

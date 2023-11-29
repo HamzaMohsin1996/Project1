@@ -12,7 +12,7 @@ button,a{
 .main-wrapper video{
     width: 100%;
     height: calc(100vh - 60px);
-    object-fit: cover; 
+    /* object-fit: cover;  */
 }
 .main-screen-wrapper .card-wrapper{
     height: 200px;
