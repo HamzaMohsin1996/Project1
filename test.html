@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Player</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="video-container">
+    <video id="videoPlayer" controls autoplay>
+      <!-- Your video sources -->
+      <source src="./Assets/images/1.AmbulanceMoveLeft-Audio.mp4" type="video/mp4">
+      <!-- Add more source elements if needed -->
+    </video>
+    <div id="videoButtons" class="hidden">
+      <button id="leftButton" class="arrow-button">←</button>
+      <button id="frontButton" class="arrow-button">↑</button>
+    </div>
+  </div>
+  <div id="timer" class="hidden">
+    <span id="timeElapsed">00:00:00.000</span>
+  </div>
+  <table id="timeTable" class="hidden">
+    <thead>
+      <tr>
+        <th>Video Name</th>
+        <th>Time Elapsed (milliseconds)</th>
+      </tr>
+    </thead>
+    <tbody id="timeTableBody"></tbody>
+  </table>
+  <script>
+  const video = document.getElementById('videoPlayer');
+const videoButtons = document.getElementById('videoButtons');
+const timerDiv = document.getElementById('timer');
+const timeElapsedSpan = document.getElementById('timeElapsed');
+const timeTableBody = document.getElementById('timeTableBody');
+
+
+
+let videoIndex = 0;
+
+
+let timerInterval;
+let startTime;
+const frontButtonVideos = [
+  './Assets/images/front-view.mp4',
+  './Assets/images/1.AmbulanceMoveLeft-Audio.mp4',
+  './Assets/images/2.AmbulancePass-Audio.mp4',
+  './Assets/images/bus-inside-view.mp4'
+];
+const leftButtonVideos = [
+    './Assets/images/2.AmbulancePass-Audio.mp4',
+    './Assets/images/front-view.mp4',
+  './Assets/images/bus-inner-view.mp4',
+  './Assets/images/bus-inside-view.mp4'
+];
+
+
+
+let leftVideoIndex = 0;
+let frontVideoIndex = 0;
+let currentVideos = leftButtonVideos;
+// Rest of your existing code...
+
+document.getElementById('leftButton').addEventListener('click', function() {
+  stopTimer();
+  const currentTime = Date.now();
+  const elapsedTime = currentTime - startTime;
+  recordTime(currentVideos[leftVideoIndex], elapsedTime);
+
+  if (leftVideoIndex < leftButtonVideos.length - 1) {
+    leftVideoIndex++;
+    video.src = leftButtonVideos[leftVideoIndex];
+    video.play();
+    resetUI();
+  } else {
+    alert('All left button videos have been played');
+  }
+});
+
+document.getElementById('frontButton').addEventListener('click', function() {
+  stopTimer();
+  const currentTime = Date.now();
+  const elapsedTime = currentTime - startTime;
+  recordTime(currentVideos[frontVideoIndex], elapsedTime);
+
+  if (frontVideoIndex < frontButtonVideos.length - 1) {
+    frontVideoIndex++;
+    video.src = frontButtonVideos[frontVideoIndex];
+    video.play();
+    resetUI();
+  } else {
+    alert('All front button videos have been played');
+  }
+
+});
+
+video.addEventListener('ended', function() {
+  videoButtons.classList.remove('hidden');
+  startTimer();
+});
+
+function startTimer() {
+  startTime = Date.now();
+
+  timerInterval = setInterval(function() {
+    const elapsedTime = Date.now() - startTime;
+    timeElapsedSpan.textContent = formatTime(elapsedTime);
+  }, 10); // Update every 10 milliseconds for more precise timing
+}
+
+function formatTime(milliseconds) {
+  const date = new Date(milliseconds);
+  return date.toISOString().substr(11, 12);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+function recordTime(videoName, time) {
+  const newRow = `<tr><td>${videoName}</td><td>${time}</td></tr>`;
+  timeTableBody.innerHTML += newRow;
+}
+
+function resetUI() {
+  videoButtons.classList.add('hidden');
+  timerDiv.classList.remove('hidden');
+  timeElapsedSpan.textContent = '00:00:00.000';
+}
+
+video.src = currentVideos[videoIndex];
+video.play();
+
+  </script>
+
+</body>
+</html>

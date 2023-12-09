@@ -397,3 +397,25 @@ video::-webkit-media-controls-fullscreen-button {
       transform: scale(1);
     }
   }
+
+  /* Add your CSS styles here */
+.video-container {
+    position: relative;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #videoButtons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .arrow-button {
+    font-size: 24px;
+    margin: 0 10px;
+  }
+  
