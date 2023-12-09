@@ -101,49 +101,31 @@ function displayTimeRecord(elapsedTime) {
   document.getElementById('timeTable').style.display = 'table';
 }
 function playVideo(videoSrc) {
-  let pauseDuration;
-
-  // Set the pause duration based on the video source
-  if (videoSrc.includes('1.AmbulanceMoveLeft-Audio')) {
-    pauseDuration = 10; // Pause duration for 'bus-inside-view' video is 10 seconds
-  } else if (videoSrc.includes('2.AmbulancePass-Audio')) {
-    pauseDuration = 50; // Pause duration for 'front-view' video is 50 seconds
-  } else {
-    pauseDuration = 20; // Default pause duration for other videos
-  }
-
   stopTimer(); // Stop the timer
   video.src = videoSrc; // Change video source
   video.play();
   videoButtons.style.display = 'none'; // Hide buttons after video change
   timerDiv.style.display = 'none'; // Hide timer display
-
-  // Remove any existing timeupdate listener before adding a new one
-  video.removeEventListener('timeupdate', pauseAtDuration);
-
-  video.addEventListener('timeupdate', pauseAtDuration);
-
-  function pauseAtDuration() {
-    const currentTime = video.currentTime;
-    if (currentTime >= pauseDuration) {
-      video.pause();
-      videoButtons.style.display = 'block'; // Display control buttons at specified pause duration
-      startTimer(); // Start the timer when video pauses
-      video.removeEventListener('timeupdate', pauseAtDuration); // Remove the event listener after pausing
-    }
-  }
-
-  setTimeout(() => {
-    videoButtons.style.display = 'block'; // Show buttons after the specified pause duration
-  }, pauseDuration * 1000);
 }
-
 function playLeftVideo() {
   playVideo('https://ia600500.us.archive.org/28/items/2.-ambulance-pass-audio/2.AmbulancePass-Audio.mp4');
 }
 
 function playFrontVideo() {
-  playVideo('https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4');
+  stopTimer(); // Stop the timer if running
+  videoButtons.style.display = 'none'; // Hide control buttons
+  timerDiv.style.display = 'none'; // Hide timer display
+  video.removeEventListener('timeupdate', pauseAtDuration); // Remove the event listener for timeupdate
+
+  // Play the video if it's not already playing
+  if (video.paused) {
+    video.play();
+  }
+
+  // Optionally, you can set a timer to show buttons again after a certain duration
+  setTimeout(() => {
+    videoButtons.style.display = 'block'; // Show buttons after a certain duration (if needed)
+  }, 5000);
 }
 
 // function playThirdVideo() {
@@ -157,16 +139,15 @@ videoButtons.addEventListener('click', function (event) {
   }
 });
 function handleButtonClick(event) {
+  event.preventDefault(); // Prevent the default action of the button click
+  
   if (event.target.tagName === 'BUTTON') {
     stopTimer();
     if (event.target.id === 'leftButton') {
       playLeftVideo();
     } else if (event.target.id === 'frontButton') {
       playFrontVideo();
-    } 
-    // else if (event.target.id === 'rightButton') {
-    //   playThirdVideo();
-    // }
+    }
   }
 }
 function handleMouseHover(event) {
