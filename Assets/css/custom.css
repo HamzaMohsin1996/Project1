@@ -219,7 +219,6 @@ button,a{
     position: absolute;
     top: 50%;
     left: 43%;
-    display: none;
 }
 .custom-btn.blue-btn{
     min-width: auto;
@@ -232,10 +231,10 @@ button,a{
     right: 20px;
 }
 /* Style for the timer */
-.timer {
+.timeElapsed {
     display: inline-block;
     font-size: 40px;
-    background-color:  #005a9a;;
+    background-color:  #005a9a;
     color: white;
     padding: 10px;
     border-radius: 5px;
