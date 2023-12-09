@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Player</title>
+</head>
+<body>
+  <video id="videoPlayer" width="640" height="360" autoplay controls src="https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4">
+    <!-- Video source will be updated dynamically -->
+  </video>
+  
+  <div id="videoButtons">
+    <button id="leftButton">Play Left Videos</button>
+    <button id="frontButton">Play Front Videos</button>
+  </div>
+  
+  <div id="timer">
+    <span id="timeElapsed"></span>
+    <button id="saveTimeButton">Save Time</button>
+  </div>
+  
+  <table id="timeTable" style="display: none;">
+    <thead>
+      <tr>
+        <th>Video Name</th>
+        <th>Elapsed Time</th>
+      </tr>
+    </thead>
+    <tbody id="timeTableBody"></tbody>
+  </table>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    jQuery.noConflict();
+    (function($) {
+      $(function() {
+        const videoPlayer = document.getElementById('videoPlayer');
+        const timeElapsedSpan = document.getElementById('timeElapsed');
+        const timeTableBody = document.getElementById('timeTableBody');
+
+        let timerInterval;
+        let startTime;
+
+        function playVideo(videoSrc) {
+          videoPlayer.src = videoSrc;
+          videoPlayer.load();
+          videoPlayer.play();
+
+          videoPlayer.addEventListener('ended', function() {
+            stopTimer();
+          });
+        }
+
+        function startTimer() {
+          startTime = Date.now();
+
+          timerInterval = setInterval(function() {
+            const elapsedTime = new Date(Date.now() - startTime);
+            const hours = pad(elapsedTime.getUTCHours());
+            const minutes = pad(elapsedTime.getUTCMinutes());
+            const seconds = pad(elapsedTime.getUTCSeconds());
+
+            timeElapsedSpan.textContent = `${hours}:${minutes}:${seconds}`;
+          }, 10);
+        }
+
+        function stopTimer() {
+          clearInterval(timerInterval);
+          const elapsedTime = new Date(Date.now() - startTime).toISOString().substr(11, 12);
+          const videoName = videoPlayer.src.substring(videoPlayer.src.lastIndexOf('/') + 1);
+
+          // Display elapsed time in the table
+          const newRow = `<tr><td>${videoName}</td><td>${elapsedTime}</td></tr>`;
+          timeTableBody.innerHTML += newRow;
+          document.getElementById('timeTable').style.display = 'table';
+        }
+
+        function pad(value) {
+          return value < 10 ? '0' + value : value;
+        }
+
+        const leftVideos = [
+          'https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4',
+          'https://ia600500.us.archive.org/28/items/2.-ambulance-pass-audio/2.AmbulancePass-Audio.mp4',
+          'https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4',
+          'https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4'
+        ];
+
+        const frontVideos = [
+          'https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4',
+          'https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4',
+          'https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4',
+          'https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4'
+        ];
+
+        $('#leftButton').click(function() {
+          leftVideos.forEach(videoSrc => {
+            playVideo(videoSrc);
+            startTimer();
+          });
+        });
+
+        $('#frontButton').click(function() {
+          frontVideos.forEach(videoSrc => {
+            playVideo(videoSrc);
+            startTimer();
+          });
+        });
+
+        $('#saveTimeButton').click(function() {
+          stopTimer();
+        });
+      });
+    })(jQuery);
+  </script>
+</body>
+</html>
