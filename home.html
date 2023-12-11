@@ -24,18 +24,35 @@
 <body class="p-4">
     <div class="main-wrapper">
         <div class="custom-video-wrapper">
-          <video id="videoPlayer" controls autoplay>
-            <source src="./Assets/images/front-view.mp4" type="video/mp4">
-            <source src="./Assets/images/front-view.mp4" type="video/ogg">
+          <video id="videoPlayer" autoplay  controls >
+            <source src="https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4" type="video/mp4">
+            <source src="https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4" type="video/ogg">
             Your browser does not support the video tag.
           </video>
-    
+          <!-- <div class="speed-limit-wrapper">
+              <div class="speed-limit-wrapper-inner">
+                <p>Speed Limit</p>
+                <span>100</span>
+              </div>
+          </div> -->
+          <div class="caution-wrapper">
+            <div class="caution-wrapper-inner">
+              <img src="./Assets/images/danger.png" alt="danger-img">
+              <p>Ambulance Approaching</p>
+            </div>
+          </div>
          <div class="emergency-btns-wrapper" id="videoButtons" style="display: none;">
-  <button class="custom-btn blue-btn" id="leftBtn"><i class="fa fa-arrow-left"></i></button>
-  <button class="custom-btn blue-btn" id="upBtn"><i class="fa fa-arrow-up"></i></button>
-  <button class="custom-btn blue-btn" id="rightBtn"><i class="fa fa-arrow-right"></i></button>
-</div>
-          
+          <button class="custom-btn blue-btn" id="leftBtn" onclick="playLeftVideo()"><i class="fa fa-arrow-left"></i></button>
+          <button class="custom-btn blue-btn" id="upBtn" onclick="playFrontVideo()"><i class="fa fa-arrow-up"></i></button>
+          <!-- <button class="custom-btn blue-btn" id="rightBtn" onclick="playThirdVideo()"><i class="fa fa-arrow-right"></i></button> -->
+        </div>
+            <!-- <div class="back-view-wrapper">
+              <video id="videoPlayer"  autoplay muted>
+                <source src="./Assets/images/1.AmbulanceMoveLeft-Audio.mp4" type="video/mp4">
+                <source src="./Assets/images/1.AmbulanceMoveLeft-Audio.mp4" type="video/ogg">
+                Your browser does not support the video tag.
+              </video>
+            </div> -->
           <div id="timer" style="display: none;">
             <span class="timer" id="timeElapsed">00:00:00</span>
             <div id="timeDisplay" style="display: none;">Elapsed Time: 
