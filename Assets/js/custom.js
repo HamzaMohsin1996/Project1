@@ -11,173 +11,226 @@ jQuery.noConflict();
     $(".close-popup-btn").click(function(){
       $("#vehicle-view-popup").modal('hide');
     });
+    $('.custom-btn-white').on('click', function() {
+      // Remove 'active' class from all buttons
+      $('.custom-btn-white').removeClass('active');
+  
+      // Add 'active' class to the clicked button
+      $(this).addClass('active');
+    });
+    $('.new-btn').on('click', function() {
+      // Remove 'active' class from all buttons
+      $('.new-btn').removeClass('active');
+  
+      // Add 'active' class to the clicked button
+      $(this).addClass('active');
+    });
     
   });
 })(jQuery);
-
 const video = document.getElementById('videoPlayer');
 const videoButtons = document.getElementById('videoButtons');
 const timerDiv = document.getElementById('timer');
 const timeElapsedSpan = document.getElementById('timeElapsed');
-const elapsedTimeDisplay = document.getElementById('elapsedTimeDisplay');
+const timeTable = document.getElementById('timeTable');
 const timeTableBody = document.getElementById('timeTableBody');
-let pauseDuration = 5; // Default pause duration in seconds
+
+
+
+let videoIndex = 0;
+
 
 let timerInterval;
 let startTime;
-video.muted = false; // Unmute the video after page load (this might not work in all browsers)
+const frontButtonVideos = [
+  './Assets/images/1.AmbulanceMoveLeft-Audio.mp4',
+  './Assets/images/2.AmbulancePass-Audio.mp4',
+  './Assets/images/3.ambulanceCrossSuccess-Audio.mp4',
+  './Assets/images/4.ambulanceHit-Audio.mp4',
+];
+const leftButtonVideos = [
+    './Assets/images/1.AmbulanceMoveLeft-Audio.mp4',
+    './Assets/images/2.AmbulancePass-Audio.mp4',
+  './Assets/images/3.ambulanceCrossSuccess-Audio.mp4',
+  './Assets/images/4.ambulanceHit-Audio.mp4'
+];
 
-video.oncanplaythrough = () => {
-  video.play(); // Start playing the video when it's ready
-};
 
-function startTimer() {
-    startTime = Date.now();
 
-    timerInterval = setInterval(function () {
-        const elapsedTime = new Date(Date.now() - startTime);
-        const hours = pad(elapsedTime.getUTCHours());
-        const minutes = pad(elapsedTime.getUTCMinutes());
-        const seconds = pad(elapsedTime.getUTCSeconds());
+let leftVideoIndex = 0;
+let frontVideoIndex = 0;
+let currentVideos = leftButtonVideos;
+// Rest of your existing code...
 
-        timeElapsedSpan.textContent = `${hours}:${minutes}:${seconds}`;
-        updateFlipClock(`${hours}${minutes}${seconds}`);
-    }, 10); // Update every 10 milliseconds for more precise timing
-}
+document.getElementById('leftButton').addEventListener('click', function() {
+  stopTimer();
+  const currentTime = Date.now();
+  const elapsedTime = currentTime - startTime;
+  recordTime(leftButtonVideos[leftVideoIndex], elapsedTime);
 
-function stopTimer() {
-    clearInterval(timerInterval);
-}
-
-function pad(value) {
-    return value < 10 ? '0' + value : value;
-}
-
-function updateFlipClock(time) {
-    const digits = time.split('');
-
-    document.querySelectorAll('.flip-clock').forEach((clock, index) => {
-        const [top, bottom] = clock.querySelectorAll('.card');
-
-        top.textContent = digits[index];
-        bottom.textContent = digits[index];
-
-        top.style.transform = 'rotateX(0deg) translateY(-100%) rotateX(-180deg)';
-        bottom.style.transform = 'rotateX(180deg)';
-    });
-}
-
-video.addEventListener('timeupdate', function () {
-  const currentTime = video.currentTime;
-  if (currentTime >= 8) {
-    video.pause();
-    videoButtons.style.display = 'block'; // Display control buttons at 5 seconds
-    startTimer(); // Start the timer when video pauses at 5 seconds
+  if (leftVideoIndex < leftButtonVideos.length - 1) {
+    leftVideoIndex++;
+    video.src = leftButtonVideos[leftVideoIndex];
+    startNextVideo(); // Add classes when the next video starts
+  } else {
+    alert('All left button videos have been played');
   }
-  
+});
+
+document.getElementById('frontButton').addEventListener('click', function() {
+  stopTimer();
+  const currentTime = Date.now();
+  const elapsedTime = currentTime - startTime;
+  recordTime(frontButtonVideos[frontVideoIndex], elapsedTime);
+
+  if (frontVideoIndex < frontButtonVideos.length - 1) {
+    frontVideoIndex++;
+    video.src = frontButtonVideos[frontVideoIndex];
+    startNextVideo(); // Add classes when the next video starts
+  } else {
+    alert('All front button videos have been played');
+  }
+});
+
+function startNextVideo() {
+  video.play();
+  videoButtons.classList.add('hidden');
+  timerDiv.classList.add('hidden');
+  startTimer();
+}
+
+video.addEventListener('ended', function() {
+  videoButtons.classList.remove('hidden');
+  timerDiv.classList.remove('hidden');
+  timeTable.classList.remove('hidden');  
+  startTimer();
 });
 
 function startTimer() {
   startTime = Date.now();
-  // timerDiv.style.display = 'block'; // Display timer on button click
 
-  timerInterval = setInterval(function () {
-    const elapsedTime = new Date(Date.now() - startTime).toISOString().substr(11, 12);
-    timeElapsedSpan.innerText = elapsedTime;
+  timerInterval = setInterval(function() {
+    const elapsedTime = Date.now() - startTime;
+    timeElapsedSpan.textContent = formatTime(elapsedTime);
   }, 10); // Update every 10 milliseconds for more precise timing
+}
+
+function formatTime(milliseconds) {
+  const date = new Date(milliseconds);
+  const hours = pad(date.getUTCHours());
+  const minutes = pad(date.getUTCMinutes());
+  const seconds = pad(date.getUTCSeconds());
+  const millisecondsPart = padMilliseconds(date.getUTCMilliseconds());
+
+  return `${hours}:${minutes}:${seconds}.${millisecondsPart}`;
+}
+
+function pad(value) {
+  return value.toString().padStart(2, '0');
+}
+
+function padMilliseconds(value) {
+  return value.toString().padStart(3, '0');
+}
+
+// Modify the recordTime function to include formatted time values
+function recordTime(videoName, time) {
+  const formattedTime = formatTime(time);
+  const newRow = `<tr><td>${videoName}</td><td>${formattedTime}</td></tr>`;
+  timeTableBody.innerHTML += newRow;
 }
 
 function stopTimer() {
   clearInterval(timerInterval);
-  const elapsedTime = new Date(Date.now() - startTime).toISOString().substr(11, 12);
-  elapsedTimeDisplay.innerText = elapsedTime;
-  displayTimeRecord(elapsedTime);
 }
 
-function displayTimeRecord(elapsedTime) {
-  const videoName = video.src.substring(video.src.lastIndexOf('/') + 1); // Extract video name from the source
-  const newRow = `<tr><td>${videoName}</td><td>${elapsedTime}</td></tr>`;
+// Modify the recordTime function to include formatted time values
+function recordTime(videoName, time) {
+  const formattedTime = formatTime(time);
+  const newRow = `<tr><td>${videoName}</td><td>${formattedTime}</td></tr>`;
   timeTableBody.innerHTML += newRow;
-  document.getElementById('timeTable').style.display = 'table';
 }
-function playVideo(videoSrc) {
-  stopTimer(); // Stop the timer
-  video.src = videoSrc; // Change video source
-  video.play();
-  videoButtons.style.display = 'none'; // Hide buttons after video change
-  timerDiv.style.display = 'none'; // Hide timer display
-}
-function playLeftVideo() {
-  playVideo('https://ia600500.us.archive.org/28/items/2.-ambulance-pass-audio/2.AmbulancePass-Audio.mp4');
+function resetUI() {
+  videoButtons.classList.add('hidden');
+  timerDiv.classList.remove('hidden');
+  timeElapsedSpan.textContent = '00:00:00.000';
 }
 
-function playFrontVideo() {
-  stopTimer(); // Stop the timer if running
-  videoButtons.style.display = 'none'; // Hide control buttons
-  timerDiv.style.display = 'none'; // Hide timer display
-  video.removeEventListener('timeupdate', pauseAtDuration); // Remove the event listener for timeupdate
+video.src = currentVideos[videoIndex];
+video.play();
 
-  // Play the video if it's not already playing
-  if (video.paused) {
-    video.play();
+
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'ArrowLeft') {
+    handleLeftArrowKeyPress();
+  } else if (event.code === 'ArrowUp') {
+    handleFrontArrowKeyPress();
   }
+});
 
-  // Optionally, you can set a timer to show buttons again after a certain duration
-  setTimeout(() => {
-    videoButtons.style.display = 'block'; // Show buttons after a certain duration (if needed)
-  }, 5000);
+function handleLeftArrowKeyPress() {
+  stopTimer();
+  const currentTime = Date.now();
+  const elapsedTime = currentTime - startTime;
+  recordTime(leftButtonVideos[leftVideoIndex], elapsedTime);
+
+  if (leftVideoIndex < leftButtonVideos.length - 1) {
+    leftVideoIndex++;
+    video.src = leftButtonVideos[leftVideoIndex];
+    startNextVideo(); // Add classes when the next video starts
+  } else {
+    alert('All left button videos have been played');
+  }
 }
 
-// function playThirdVideo() {
-//   playVideo('https://ia601202.us.archive.org/35/items/bus-inner-view/bus-inner-view.mp4');
+function handleFrontArrowKeyPress() {
+  stopTimer();
+  const currentTime = Date.now();
+  const elapsedTime = currentTime - startTime;
+  recordTime(frontButtonVideos[frontVideoIndex], elapsedTime);
+
+  if (frontVideoIndex < frontButtonVideos.length - 1) {
+    frontVideoIndex++;
+    video.src = frontButtonVideos[frontVideoIndex];
+    startNextVideo(); // Add classes when the next video starts
+  } else {
+    alert('All front button videos have been played');
+  }
+}
+
+
+// // Function to request full-screen mode for the video
+// function requestFullScreen() {
+//   if (video.requestFullscreen) {
+//     video.requestFullscreen();
+//   } else if (video.mozRequestFullScreen) {
+//     video.mozRequestFullScreen();
+//   } else if (video.webkitRequestFullscreen) {
+//     video.webkitRequestFullscreen();
+//   } else if (video.msRequestFullscreen) {
+//     video.msRequestFullscreen();
+//   }
 // }
 
-// Function to stop timer and add time record when any button inside videoButtons is clicked
-videoButtons.addEventListener('click', function (event) {
-  if (event.target.tagName === 'BUTTON') {
-    stopTimer();
-  }
-});
-function handleButtonClick(event) {
-  event.preventDefault(); // Prevent the default action of the button click
-  
-  if (event.target.tagName === 'BUTTON') {
-    stopTimer();
-    if (event.target.id === 'leftButton') {
-      playLeftVideo();
-    } else if (event.target.id === 'frontButton') {
-      playFrontVideo();
-    }
-  }
-}
-function handleMouseHover(event) {
-  if (event.target.tagName === 'BUTTON') {
-    if (event.target.id === 'leftButton') {
-      // Handle mouse hover on left button
-      // For example: Show some tooltip or perform some action
-    } else if (event.target.id === 'frontButton') {
-      // Handle mouse hover on front button
-      // For example: Show some tooltip or perform some action
-    } 
-    // else if (event.target.id === 'rightButton') {
-    //   // Handle mouse hover on right button
-    //   // For example: Show some tooltip or perform some action
-    // }
+// // Automatically request full-screen mode when the page loads
+// window.onload = () => {
+//   requestFullScreen();
+// };
+function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  var sidebarToggle = document.querySelector('.sidebar-toggle i.fa-bars');
+  var sidebarClose = document.querySelector('.sidebar-toggle i.fa-times');
+  var mainContent = document.querySelector('.main-content');
+
+  if (sidebar.classList.contains('show')) {
+    sidebar.classList.remove('show');
+    mainContent.style.marginRight = '0';
+    sidebarToggle.style.display = 'inline-block';
+    sidebarClose.style.display = 'none';
+  } else {
+    sidebar.classList.add('show');
+    mainContent.style.marginRight = '440px'; // Adjust margin accordingly
+    sidebarToggle.style.display = 'none';
+    sidebarClose.style.display = 'inline-block';
   }
 }
-
-videoButtons.addEventListener('click', handleButtonClick);
-
-videoButtons.addEventListener('mouseover', handleMouseHover);
-
-document.addEventListener('keydown', function (event) {
-  if (event.code === 'ArrowLeft') {
-    playLeftVideo();
-  } else if (event.code === 'ArrowUp') {
-    playFrontVideo();
-  } 
-  // else if (event.code === 'ArrowRight') {
-  //   playThirdVideo();
-  // }
-});
-

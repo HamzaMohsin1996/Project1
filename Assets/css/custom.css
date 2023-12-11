@@ -1,9 +1,15 @@
+body{
+    word-break: break-all;
+}
 h6{
-    font-size: 18px;
+    font-size: 16px;
 }
 p{
     font-size: 16px;
     margin: 0;
+}
+video{
+    outline: none;
 }
 button,a{
     box-shadow:none;
@@ -219,7 +225,6 @@ button,a{
     position: absolute;
     top: 50%;
     left: 43%;
-    display: none;
 }
 .custom-btn.blue-btn{
     min-width: auto;
@@ -232,10 +237,10 @@ button,a{
     right: 20px;
 }
 /* Style for the timer */
-.timer {
+.timeElapsed {
     display: inline-block;
     font-size: 40px;
-    background-color:  #005a9a;;
+    background-color:  #005a9a;
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -419,3 +424,120 @@ video::-webkit-media-controls-fullscreen-button {
     margin: 0 10px;
   }
   
+
+
+  /* Custom Toggle Sidebar Css */
+  .custom-container {
+    display: flex;
+    /* padding-right: 80px; */
+  }
+  
+  .sidebar {
+    width: 440px;
+    height: 100vh;
+    background-color: #000000;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    position: fixed;
+    right: -440px;
+    top: 0;
+    z-index: 1;
+    padding: 60px 0 0; /* Adjust the padding to give space for the button */
+    overflow-y: scroll;
+    transition: transform 0.3s ease-in-out;
+    color: white !important;
+  }
+  .sidebar::-webkit-scrollbar{
+    display: none;
+  }
+  .sidebar.show {
+    transform: translateX(-440px); /* Move sidebar into view */
+    padding: 60px 20px 0;
+  }
+  .font-bold{
+    font-weight: 700;
+  }
+  .border-right{
+    border-right: 1px solid #707070;
+  }
+  .border-top-1{
+    border-top: 1px solid #707070;
+
+  }
+  .error-text{
+    color: #E35757;
+    font-weight: 700;
+  }
+  .font-medium{
+    font-weight: 600;
+  }
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .sidebar-toggle {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+  }
+  
+  .fa-bars,
+  .fa-times {
+    font-size: 24px;
+  }
+  .main-content {
+    margin-right: 0;
+    transition: margin-right 0.3s ease-in-out;
+  }
+ 
+
+  .button-tabs-wrapper-inner{
+    display: inline-block;
+    background-color: #484848;
+    border-radius: 30px;
+  }
+  .button-tabs-wrapper-inner .custom-btn-white{
+    padding: 15px;
+    min-width: 120px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    color: white;
+  }
+  .button-tabs-wrapper-inner .custom-btn-white.active{
+    background-color: #15b6e8;
+    border-radius: 30px;
+
+  }
+  .button-tabs-wrapper-inner button{
+    padding: 15px;
+    min-width: 120px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    color: white;
+  }
+  .new-btn.active{
+    background-color: #15b6e8;
+    border-radius: 30px;
+  }
+  .fa.fa-times{
+    color: white;
+  }
+  .speedometer-wrapper{
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 950px;
+  }
+  .speedometer-wrapper img{
+    max-width: 100%;
+  }
