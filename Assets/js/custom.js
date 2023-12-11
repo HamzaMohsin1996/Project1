@@ -61,6 +61,20 @@ let leftVideoIndex = 0;
 let frontVideoIndex = 0;
 let currentVideos = leftButtonVideos;
 // Rest of your existing code...
+let timerData = []; // Initialize an array to store timer data
+
+function saveTimerData() {
+  localStorage.setItem('timerData', JSON.stringify(timerData));
+}
+
+function loadTimerData() {
+  const storedData = localStorage.getItem('timerData');
+  if (storedData) {
+    timerData = JSON.parse(storedData);
+  }
+}
+
+
 
 document.getElementById('leftButton').addEventListener('click', function() {
   stopTimer();
@@ -102,7 +116,7 @@ function startNextVideo() {
 video.addEventListener('ended', function() {
   videoButtons.classList.remove('hidden');
   timerDiv.classList.remove('hidden');
-  timeTable.classList.remove('hidden');  
+  // timeTable.classList.remove('hidden');  
   startTimer();
 });
 
@@ -133,22 +147,32 @@ function padMilliseconds(value) {
   return value.toString().padStart(3, '0');
 }
 
-// Modify the recordTime function to include formatted time values
 function recordTime(videoName, time) {
   const formattedTime = formatTime(time);
-  const newRow = `<tr><td>${videoName}</td><td>${formattedTime}</td></tr>`;
-  timeTableBody.innerHTML += newRow;
+  timerData.push({ videoName, formattedTime });
+  saveTimerData(); // Save timer data to local storage after each recording
 }
 
 function stopTimer() {
   clearInterval(timerInterval);
 }
 
-// Modify the recordTime function to include formatted time values
-function recordTime(videoName, time) {
-  const formattedTime = formatTime(time);
-  const newRow = `<tr><td>${videoName}</td><td>${formattedTime}</td></tr>`;
-  timeTableBody.innerHTML += newRow;
+// // Modify the recordTime function to include formatted time values
+// function recordTime(videoName, time) {
+//   const formattedTime = formatTime(time);
+//   const newRow = `<tr><td>${videoName}</td><td>${formattedTime}</td></tr>`;
+//   timeTableBody.innerHTML += newRow;
+// }
+function displayTimerData() {
+  const displayContainer = document.getElementById('timerDataDisplay'); // Replace 'timerDataDisplay' with your display element ID
+  displayContainer.innerHTML = ''; // Clear previous data
+  
+  timerData.forEach((record, index) => {
+    const { videoName, formattedTime } = record;
+    const row = document.createElement('div');
+    row.innerHTML = `<p><strong>Video Name:</strong> ${videoName}</p><p><strong>Time:</strong> ${formattedTime}</p>`;
+    displayContainer.appendChild(row);
+  });
 }
 function resetUI() {
   videoButtons.classList.add('hidden');
@@ -197,6 +221,8 @@ function handleFrontArrowKeyPress() {
     alert('All front button videos have been played');
   }
 }
+loadTimerData();
+displayTimerData();
 
 
 // // Function to request full-screen mode for the video

@@ -536,8 +536,27 @@ video::-webkit-media-controls-fullscreen-button {
     bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
+    max-width: 1470px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .speedometer-wrapper > img{
     max-width: 950px;
   }
-  .speedometer-wrapper img{
-    max-width: 100%;
+  .custom-container-anticiption{
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  .indicator-left{
+    max-width: 100px;
+    width: 100%;
+  }
+  .indicator-left img{
+    transform: rotate(180deg);
+  }
+  .indicator-right{
+    max-width: 100px;
+    width: 100%;
   }
