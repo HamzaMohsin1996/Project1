@@ -11,7 +11,7 @@
   crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet">
-  <title>Test</title>
+  <title>Front View</title>
   <link rel="stylesheet" href="./Assets/css/bootstrap.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet"
       type="text/css" />
@@ -20,16 +20,101 @@
   <link rel="stylesheet" href="./Assets/css/custom.css">
 </head>
 <body>
-  <div class="main-wrapper">
+  <div class="main-wrapper main-content">
   <div class="custom-video-wrapper">
     <video id="videoPlayer" controls autoplay>
       <!-- Your video sources -->
       <source src="./Assets/images/1.AmbulanceMoveLeft-Audio.mp4" type="video/mp4">
       <!-- Add more source elements if needed -->
     </video>
+    <div class="speedometer-wrapper">
+      <img src="./Assets/images/speedometer.svg" alt="Speedometer Img">
+    </div>
     <div class="emergency-btns-wrapper hidden" id="videoButtons" >
       <button class="custom-btn blue-btn arrow-button"  id="leftButton"><i class="fa fa-arrow-left"></i></button>
       <button class="custom-btn blue-btn arrow-button"  id="frontButton"><i class="fa fa-arrow-up"></i></button>
+    </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+      <i class="fa fa-bars"></i> <!-- Font Awesome bars icon -->
+      <i class="fa fa-times" style="display: none;"></i>
+
+    </button>
+    <div class="sidebar" id="sidebar">
+      <!-- Sidebar content goes here -->
+      <h2 class="font-bold">Specs</h2>
+      <div class="row py-3">
+        <div class="col-lg-6 border-right ">
+            <div class="text-wrapper py-2 ">
+                <h6 class="font-medium">Total Distance</h6>
+                <h3 class="font-medium">15,400km</h3>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="text-wrapper py-2 ">
+                <h6 class="font-medium">Temperature</h6>
+                <h3 class="font-medium">15°C</h3>
+            </div>
+        </div>
+      </div>
+      <div class="row py-3 border-top-1 gy-3 mt-3">
+        <div class="col-lg-4 border-right">
+            <div class="text-wrapper py-2 ">
+                <h6 class="font-medium">Headlight</h6>
+                <img src="./Assets/images/light.svg" alt="light Icon" class="pt-2">
+            </div>
+        </div>
+        <div class="col-lg-4 border-right ">
+            <div class="text-wrapper py-2 text-center">
+                <h6 class="font-medium">Battery Range</h6>
+                <h3 class="font-medium">210km</h3>
+            </div>
+        </div>
+        <div class="col-lg-4 ">
+            <div class="text-wrapper py-2 text-center">
+                <h6 class="font-medium">Signal strength</h6>
+                <img src="./Assets/images/signal-strenght.svg" alt="Signal Strength" class="pt-2">
+            </div>
+        </div>
+      </div>
+      <div class="row py-3 border-top-1 gy-3 mt-3">
+        <h4 class="font-medium">Tyre Pressure Monitoring System</h4>
+            <div class="d-flex  justify-content-between py-3">
+                <p>Front right tyre </p>
+                <p>42 psi</p>
+            </div>
+            <div class="d-flex  justify-content-between py-3">
+                <p>Front left tyre </p>
+                <p>42 psi</p>
+            </div>
+            <div class="d-flex  justify-content-between py-3">
+                <p>Rear right tyre </p>
+                <p>42 psi</p>
+            </div>
+            <div class="d-flex  justify-content-between py-3">
+                <p class="error-text">Rear left tyre </p>
+                <p class="error-text">32 psi</p>
+            </div>
+      </div>
+      <div class="row py-3 border-top-1 gy-3 mt-3">
+        <h4 class="font-medium">Interior</h4>
+            <div class="button-tabs-wrapper">
+                    <h6 class="font-medium mb-3">Dome Lights</h6 >
+                <div class="button-tabs-wrapper-inner">
+                    <button class="custom-btn-white active">Off</button>
+                    <button class="custom-btn-white">On</button>
+                    <button class="custom-btn-white">auto</button>
+                </div>
+            </div>
+      </div>
+      <div class="row py-3 border-top-1 gy-3 mt-3">
+            <div class="button-tabs-wrapper">
+                <h4 class="font-medium mb-3">Regenerative Braking</h4>
+                <div class="button-tabs-wrapper-inner">
+                    <button class="new-btn active">Standard </button>
+                    <button class="new-btn">Low</button>
+                </div>
+            </div>
+      </div>
     </div>
   </div>
   <div id="timer" class="hidden">

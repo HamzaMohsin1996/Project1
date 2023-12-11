@@ -11,6 +11,20 @@ jQuery.noConflict();
     $(".close-popup-btn").click(function(){
       $("#vehicle-view-popup").modal('hide');
     });
+    $('.custom-btn-white').on('click', function() {
+      // Remove 'active' class from all buttons
+      $('.custom-btn-white').removeClass('active');
+  
+      // Add 'active' class to the clicked button
+      $(this).addClass('active');
+    });
+    $('.new-btn').on('click', function() {
+      // Remove 'active' class from all buttons
+      $('.new-btn').removeClass('active');
+  
+      // Add 'active' class to the clicked button
+      $(this).addClass('active');
+    });
     
   });
 })(jQuery);
@@ -29,16 +43,16 @@ let videoIndex = 0;
 let timerInterval;
 let startTime;
 const frontButtonVideos = [
-  './Assets/images/front-view.mp4',
   './Assets/images/1.AmbulanceMoveLeft-Audio.mp4',
   './Assets/images/2.AmbulancePass-Audio.mp4',
-  './Assets/images/bus-inside-view.mp4'
+  './Assets/images/3.ambulanceCrossSuccess-Audio.mp4',
+  './Assets/images/4.ambulanceHit-Audio.mp4',
 ];
 const leftButtonVideos = [
+    './Assets/images/1.AmbulanceMoveLeft-Audio.mp4',
     './Assets/images/2.AmbulancePass-Audio.mp4',
-    './Assets/images/front-view.mp4',
-  './Assets/images/bus-inner-view.mp4',
-  './Assets/images/bus-inside-view.mp4'
+  './Assets/images/3.ambulanceCrossSuccess-Audio.mp4',
+  './Assets/images/4.ambulanceHit-Audio.mp4'
 ];
 
 
@@ -185,20 +199,38 @@ function handleFrontArrowKeyPress() {
 }
 
 
-// Function to request full-screen mode for the video
-function requestFullScreen() {
-  if (video.requestFullscreen) {
-    video.requestFullscreen();
-  } else if (video.mozRequestFullScreen) {
-    video.mozRequestFullScreen();
-  } else if (video.webkitRequestFullscreen) {
-    video.webkitRequestFullscreen();
-  } else if (video.msRequestFullscreen) {
-    video.msRequestFullscreen();
+// // Function to request full-screen mode for the video
+// function requestFullScreen() {
+//   if (video.requestFullscreen) {
+//     video.requestFullscreen();
+//   } else if (video.mozRequestFullScreen) {
+//     video.mozRequestFullScreen();
+//   } else if (video.webkitRequestFullscreen) {
+//     video.webkitRequestFullscreen();
+//   } else if (video.msRequestFullscreen) {
+//     video.msRequestFullscreen();
+//   }
+// }
+
+// // Automatically request full-screen mode when the page loads
+// window.onload = () => {
+//   requestFullScreen();
+// };
+function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  var sidebarToggle = document.querySelector('.sidebar-toggle i.fa-bars');
+  var sidebarClose = document.querySelector('.sidebar-toggle i.fa-times');
+  var mainContent = document.querySelector('.main-content');
+
+  if (sidebar.classList.contains('show')) {
+    sidebar.classList.remove('show');
+    mainContent.style.marginRight = '0';
+    sidebarToggle.style.display = 'inline-block';
+    sidebarClose.style.display = 'none';
+  } else {
+    sidebar.classList.add('show');
+    mainContent.style.marginRight = '440px'; // Adjust margin accordingly
+    sidebarToggle.style.display = 'none';
+    sidebarClose.style.display = 'inline-block';
   }
 }
-
-// Automatically request full-screen mode when the page loads
-window.onload = () => {
-  requestFullScreen();
-};
