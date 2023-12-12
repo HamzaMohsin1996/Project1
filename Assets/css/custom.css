@@ -560,3 +560,9 @@ video::-webkit-media-controls-fullscreen-button {
     max-width: 100px;
     width: 100%;
   }
+  .map-wrapper{
+    position: absolute;
+    top: 10px;
+    left: 1%;
+    width: 240px;
+  }
