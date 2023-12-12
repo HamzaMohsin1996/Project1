@@ -22,7 +22,7 @@
 <body>
   <div class="main-wrapper main-content">
   <div class="custom-video-wrapper">
-    <video id="videoPlayer" controls autoplay>
+    <video id="videoPlayer"  controls autoplay muted>
       <!-- Your video sources -->
       <source src="./Assets/images/1.AmbulanceMoveLeft-Audio.mp4" type="video/mp4">
       <!-- Add more source elements if needed -->
@@ -39,6 +39,9 @@
     <div class="emergency-btns-wrapper hidden" id="videoButtons" >
       <button class="custom-btn blue-btn arrow-button"  id="leftButton"><i class="fa fa-arrow-left"></i></button>
       <button class="custom-btn blue-btn arrow-button"  id="frontButton"><i class="fa fa-arrow-up"></i></button>
+    </div>
+    <div class="map-wrapper">
+      <img src="./Assets/images/Map.svg" alt="map Image">
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">
       <i class="fa fa-bars"></i> <!-- Font Awesome bars icon -->
