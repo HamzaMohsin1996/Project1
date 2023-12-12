@@ -62,6 +62,8 @@ let frontVideoIndex = 0;
 let currentVideos = leftButtonVideos;
 // Rest of your existing code...
 let timerData = []; // Initialize an array to store timer data
+let videoEnded = false;
+
 
 function saveTimerData() {
   localStorage.setItem('timerData', JSON.stringify(timerData));
@@ -111,11 +113,17 @@ function startNextVideo() {
   videoButtons.classList.add('hidden');
   timerDiv.classList.add('hidden');
   startTimer();
+  disableArrowKeys(); // Disable arrow keys when the next video starts
+
 }
 
 video.addEventListener('ended', function() {
+  enableArrowKeys(); // Enable arrow keys when the video ends
+  document.dispatchEvent(new KeyboardEvent('keydown', { 'code': 'DummyKey' }));
+  videoEnded = true;
+
   videoButtons.classList.remove('hidden');
-  timerDiv.classList.remove('hidden');
+  // timerDiv.classList.remove('hidden');
   // timeTable.classList.remove('hidden');  
   startTimer();
 });
@@ -148,8 +156,8 @@ function padMilliseconds(value) {
 }
 
 function recordTime(videoName, time) {
-  const formattedTime = formatTime(time);
-  timerData.push({ videoName, formattedTime });
+  const responsetime = formatTime(time);
+  timerData.push({ videoName, responsetime });
   saveTimerData(); // Save timer data to local storage after each recording
 }
 
@@ -159,8 +167,8 @@ function stopTimer() {
 
 // // Modify the recordTime function to include formatted time values
 // function recordTime(videoName, time) {
-//   const formattedTime = formatTime(time);
-//   const newRow = `<tr><td>${videoName}</td><td>${formattedTime}</td></tr>`;
+//   const responsetime = formatTime(time);
+//   const newRow = `<tr><td>${videoName}</td><td>${responsetime}</td></tr>`;
 //   timeTableBody.innerHTML += newRow;
 // }
 function displayTimerData() {
@@ -168,9 +176,9 @@ function displayTimerData() {
   displayContainer.innerHTML = ''; // Clear previous data
   
   timerData.forEach((record, index) => {
-    const { videoName, formattedTime } = record;
+    const { videoName, responsetime } = record;
     const row = document.createElement('div');
-    row.innerHTML = `<p><strong>Video Name:</strong> ${videoName}</p><p><strong>Time:</strong> ${formattedTime}</p>`;
+    row.innerHTML = `<p><strong>Video Name:</strong> ${videoName}</p><p><strong>Time:</strong> ${responsetime}</p>`;
     displayContainer.appendChild(row);
   });
 }
@@ -182,13 +190,38 @@ function resetUI() {
 
 video.src = currentVideos[videoIndex];
 video.play();
+let allowArrowKeyPress = false; // Flag to allow/disallow arrow key presses
 
+// Function to disable arrow key press
+function disableArrowKeys() {
+  allowArrowKeyPress = false;
+}
+
+// Function to enable arrow key press
+function enableArrowKeys() {
+  allowArrowKeyPress = true;
+}
+// Event listener for the 'click' event of the video
+video.addEventListener('click', function(event) {
+  if (videoEnded) {
+    // Prevent the default behavior (pause/play) if the video has ended
+    event.preventDefault();
+    // You can add your logic here if needed
+    // For example, you can start the next video if arrow keys are pressed
+  }
+});
 
 document.addEventListener('keydown', function(event) {
-  if (event.code === 'ArrowLeft') {
-    handleLeftArrowKeyPress();
-  } else if (event.code === 'ArrowUp') {
-    handleFrontArrowKeyPress();
+  if (allowArrowKeyPress) {
+    if (event.code === 'ArrowLeft') {
+      handleLeftArrowKeyPress();
+    } else if (event.code === 'ArrowUp') {
+      handleFrontArrowKeyPress();
+    }
+  }
+   // Prevent default tab behavior if the video is focused
+  if (event.code === 'Space' && document.activeElement === video ) {
+    event.preventDefault();
   }
 });
 
@@ -223,25 +256,6 @@ function handleFrontArrowKeyPress() {
 }
 loadTimerData();
 displayTimerData();
-
-
-// // Function to request full-screen mode for the video
-// function requestFullScreen() {
-//   if (video.requestFullscreen) {
-//     video.requestFullscreen();
-//   } else if (video.mozRequestFullScreen) {
-//     video.mozRequestFullScreen();
-//   } else if (video.webkitRequestFullscreen) {
-//     video.webkitRequestFullscreen();
-//   } else if (video.msRequestFullscreen) {
-//     video.msRequestFullscreen();
-//   }
-// }
-
-// // Automatically request full-screen mode when the page loads
-// window.onload = () => {
-//   requestFullScreen();
-// };
 function toggleSidebar() {
   var sidebar = document.getElementById('sidebar');
   var sidebarToggle = document.querySelector('.sidebar-toggle i.fa-bars');
