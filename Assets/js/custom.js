@@ -43,13 +43,13 @@ let videoIndex = 0;
 let timerInterval;
 let startTime;
 const frontButtonVideos = [
-  './Assets/images/1.AmbulanceMoveLeft-Audio.mp4',
+  './Assets/images//S1.mp4',
   './Assets/images/2.AmbulancePass-Audio.mp4',
   './Assets/images/3.ambulanceCrossSuccess-Audio.mp4',
   './Assets/images/4.ambulanceHit-Audio.mp4',
 ];
 const leftButtonVideos = [
-    './Assets/images/1.AmbulanceMoveLeft-Audio.mp4',
+    './Assets/images/S1.mp4',
     './Assets/images/2.AmbulancePass-Audio.mp4',
   './Assets/images/3.ambulanceCrossSuccess-Audio.mp4',
   './Assets/images/4.ambulanceHit-Audio.mp4'
