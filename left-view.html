@@ -20,11 +20,11 @@
   <link rel="stylesheet" href="./Assets/css/custom.css">
 </head>
 <body>
-  <div class="main-wrapper left-view-screen-wrapper">
+  <!-- <div class="main-wrapper left-view-screen-wrapper">
     <div class="left-view-wrapper">
         <div class="custom-container">
             <div class="main-content">
-              <!-- Main content goes here -->
+              Main content goes here
               <div class="right-side-view-video-wrapper">
                 <video id="videoPlayer" autoplay  controls >
                     <source src="https://ia601200.us.archive.org/14/items/1.-ambulance-move-left-audio/1.AmbulanceMoveLeft-Audio.mp4" type="video/mp4">
@@ -35,8 +35,170 @@
             </div>
           </div>
     </div>
+  </div> -->
+  <div class="main-wrapper left-view-screen-wrapper">
+  <video id="myVideo" width="400" controls>
+    <source src="./Assets/images/S1.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="emergency-btns-wrapper ">
+  <button class="custom-btn blue-btn arrow-button" id="button1"><i class="fa fa-arrow-left"></i></button>
+  <button class="custom-btn blue-btn arrow-button" id="button2"><i class="fa fa-arrow-up"></i></button>
+  <button class="custom-btn blue-btn arrow-button" id="button3"><i class="fa fa-arrow-right"></i></button>
+  <button class="custom-btn blue-btn arrow-button" id="button4" style="display: none;">Break</button>
+
+
   </div>
- 
+  
+  <table id="clickTimesTable">
+    <tr>
+      <th>Button</th>
+      <th>Click Time</th>
+      <th>Reaction Time (7-13.5s)</th>
+      <th>Reaction Time (45-57s)</th>
+    </tr>
+  </table>
+  </div>
+ <script>
+const video = document.getElementById('myVideo');
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
+const button3 = document.getElementById('button3');
+const button4 = document.getElementById('button4');
+const clickTimesTable = document.getElementById('clickTimesTable');
+
+const intervals = [
+  { start: 7, end: 13.5, label: 'Reaction Time (7-13.5s)' },
+  { start: 45, end: 57, label: 'Reaction Time (45-57s)' },
+];
+
+let recording = false;
+let startTime = 0;
+let intervalsClicked = {}; // Store intervals clicked status
+
+// Initialize intervalsClicked object
+intervals.forEach(interval => {
+  intervalsClicked[interval.label] = false;
+});
+
+// Function to calculate current video time
+function getCurrentTime() {
+  return video.currentTime;
+}
+
+// Function to add a row to the table with button click and reaction time within intervals
+function addButtonClickRecord(buttonId, clickTime) {
+  const newRow = clickTimesTable.insertRow(-1);
+  const cell1 = newRow.insertCell(0);
+  const cell2 = newRow.insertCell(1);
+
+  cell1.innerHTML = buttonId;
+  const reactionTimes = intervals.map(interval => {
+    if (clickTime >= interval.start && clickTime <= interval.end) {
+      return clickTime - interval.start;
+    }
+    return '-';
+  });
+  reactionTimes.forEach((reactionTime, index) => {
+    const cell = newRow.insertCell(index + 2);
+    cell.innerHTML = reactionTime !== '-' ? reactionTime.toFixed(2) : '-';
+  });
+}
+
+// Event listener for video time updates
+video.addEventListener('timeupdate', () => {
+  const currentTime = getCurrentTime();
+
+  // Check if the current time is within the interval for Button 4
+  if (currentTime >= 45 && currentTime <= 57) {
+    button4.style.display = 'block';
+  } else {
+    button4.style.display = 'none';
+  }
+
+  if (!recording) {
+    for (const interval of intervals) {
+      if (
+        currentTime >= interval.start &&
+        currentTime <= interval.end &&
+        !intervalsClicked[interval.label]
+      ) {
+        recording = true;
+        startTime = currentTime;
+        break;
+      }
+    }
+  } else {
+    let found = false;
+    for (const interval of intervals) {
+      if (currentTime >= interval.start && currentTime <= interval.end) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      recording = false;
+    }
+  }
+});
+
+// Event listeners for button clicks
+button1.addEventListener('click', () => {
+  if (recording) {
+    const currentTime = getCurrentTime();
+    addButtonClickRecord('Button 1', currentTime);
+    // Mark the interval as clicked
+    intervals.forEach(interval => {
+      if (currentTime >= interval.start && currentTime <= interval.end) {
+        intervalsClicked[interval.label] = true;
+      }
+    });
+    recording = false;
+  }
+});
+
+button2.addEventListener('click', () => {
+  if (recording) {
+    const currentTime = getCurrentTime();
+    addButtonClickRecord('Button 2', currentTime);
+    // Mark the interval as clicked
+    intervals.forEach(interval => {
+      if (currentTime >= interval.start && currentTime <= interval.end) {
+        intervalsClicked[interval.label] = true;
+      }
+    });
+    recording = false;
+  }
+});
+
+button3.addEventListener('click', () => {
+  if (recording) {
+    const currentTime = getCurrentTime();
+    addButtonClickRecord('Button 3', currentTime);
+    // Mark the interval as clicked
+    intervals.forEach(interval => {
+      if (currentTime >= interval.start && currentTime <= interval.end) {
+        intervalsClicked[interval.label] = true;
+      }
+    });
+    recording = false;
+  }
+});
+
+button4.addEventListener('click', () => {
+  if (
+    !intervalsClicked['Reaction Time (45-57s)'] &&
+    button4.style.display !== 'none' &&
+    recording
+  ) {
+    const currentTime = getCurrentTime();
+    addButtonClickRecord('Button 4', currentTime);
+    intervalsClicked['Reaction Time (45-57s)'] = true;
+    recording = false;
+  }
+});
+
+ </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
@@ -47,7 +209,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" ></script>
         <script src="./Assets/js/bootstrap.min.js"></script>
-    <script src="./Assets/js/custom.js"></script>
+    <!-- <script src="./Assets/js/custom.js"></script> -->
     <script src="./Assets/js/select.js"></script>
 
 </body>
