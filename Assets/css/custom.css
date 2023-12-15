@@ -21,7 +21,7 @@ button,a{
 .main-wrapper video{
     width: 100%;
     height: calc(100vh - 5.3px);
-    /* object-fit: cover;  */
+    object-fit: cover; 
 }
 .main-screen-wrapper .card-wrapper{
     height: 200px;
@@ -226,7 +226,7 @@ button,a{
 }
 .emergency-btns-wrapper{
   position: absolute;
-  top: 82%;
+  bottom: 140px;
   left: 48%;
   display: flex;
   align-items: center;
@@ -546,7 +546,7 @@ video::-webkit-media-controls-fullscreen-button {
   .speedometer-wrapper{
     /* display: none; */
     position: absolute;
-    bottom: 20px;
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     max-width: 930px;
@@ -577,7 +577,7 @@ video::-webkit-media-controls-fullscreen-button {
   .map-wrapper{
     position: absolute;
     top: 40px;
-    left: 28%;
+    left: 26%;
     width: 240px;
     /* display: none; */
   }
@@ -598,6 +598,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
     .speedometer-wrapper {
       max-width: 300px;
+      bottom: 50px;
   }
     .speedometer-wrapper > img {
       max-width: 230px;
@@ -637,3 +638,29 @@ video::-webkit-media-controls-fullscreen-button {
   padding: 0;
 }
   }
+  .signal-wrapper{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 10px;
+    background-color: rgba(1,1,1);
+    background-size: contain;
+  }
+.red-light{
+  width: 11px;
+  height: 11px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  left: 19px;
+}
+.green-light{
+  width: 11px;
+  height: 11px;
+  background: green;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  left: 19px;
+}
