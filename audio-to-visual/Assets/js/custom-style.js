@@ -1,3 +1,33 @@
+jQuery.noConflict();
+(function( $ ) {
+  $(function() {
+    // More code using $ as alias to jQuery
+    // $('button').click(function(){
+    //     $('#exampleModal').modal('show');
+    // });
+    $(".custom-modal-btn").click(function(){
+      $("#vehicle-view-popup").modal('show');
+    });
+    $(".close-popup-btn").click(function(){
+      $("#vehicle-view-popup").modal('hide');
+    });
+    $('.custom-btn-white').on('click', function() {
+      // Remove 'active' class from all buttons
+      $('.custom-btn-white').removeClass('active');
+  
+      // Add 'active' class to the clicked button
+      $(this).addClass('active');
+    });
+    $('.new-btn').on('click', function() {
+      // Remove 'active' class from all buttons
+      $('.new-btn').removeClass('active');
+  
+      // Add 'active' class to the clicked button
+      $(this).addClass('active');
+    });
+    
+  });
+})(jQuery);
 const video = document.getElementById('myVideo');
 const button1 = document.getElementById('button1');
 const button2 = document.getElementById('button2');
@@ -77,13 +107,16 @@ function formatTime(currentTime) {
 function handleButtonClick(buttonId) {
   if (recording) {
     const currentTime = getCurrentTime();
-    const ResponseTime =formatTime(currentTime - startTime) ; // Calculate the Response time
-    addResponseTime(buttonId, ResponseTime, intervals.find(interval => !intervalsClicked[interval.label]).label);
-    intervalsClicked[intervals.find(interval => !intervalsClicked[interval.label]).label] = true;
+    const responseTime = formatTime(currentTime - startTime);
+    const intervalLabel = intervals.find(interval => !intervalsClicked[interval.label]).label;
+
+    addResponseTime(buttonId, responseTime, intervalLabel); // Store in local storage
+    updateTable(buttonId, responseTime, intervalLabel); // Update the table
+
+    intervalsClicked[intervalLabel] = true;
     recording = false;
   }
 }
-
 // Event listeners for button clicks
 button1.addEventListener('click', () => {
   handleButtonClick('Left Turn');
@@ -114,16 +147,16 @@ document.addEventListener('keydown', (event) => {
   let buttonId = '';
   switch (keyName) {
     case 'ArrowLeft':
-      buttonId = 'LeftLane visuals';
+      buttonId = 'LeftLane ATV';
       break;
     case 'ArrowRight':
-      buttonId = 'RightLane visuals';
+      buttonId = 'RightLane ATV';
       break;
     case ' ':
-      buttonId = 'Brake visuals';
+      buttonId = 'Stop ATV';
       break;
     case 'ArrowUp':
-      buttonId = 'Straight visuals';
+      buttonId = 'Straight ATV';
       break;
     default:
       break;
@@ -134,6 +167,20 @@ document.addEventListener('keydown', (event) => {
     handleButtonClick(`${buttonId} (${keyName})`);
   }
 });
+// Function to update the table with response times
+function updateTable(buttonId, responseTime, intervalLabel) {
+  const clickTimesTable = document.getElementById('clickTimesTable');
+  const newRow = clickTimesTable.insertRow(-1);
+
+  const cell1 = newRow.insertCell(0);
+  const cell2 = newRow.insertCell(1);
+  const cell3 = newRow.insertCell(2);
+
+  cell1.innerHTML = buttonId;
+  cell2.innerHTML = intervalLabel;
+  cell3.innerHTML = responseTime;
+}
+
 
 function toggleSidebar() {
   var sidebar = document.getElementById('sidebar');

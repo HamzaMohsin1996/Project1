@@ -35,6 +35,10 @@ const timeElapsedSpan = document.getElementById('timeElapsed');
 const timeTable = document.getElementById('timeTable');
 const timeTableBody = document.getElementById('timeTableBody');
 
+const redlight = document.getElementById('red-light-id');
+const greenlight = document.getElementById('green-light-id');
+const signalWrapper = document.getElementsByClassName('signal-wrapper');
+
 
 
 let videoIndex = 0;
@@ -68,6 +72,25 @@ let videoEnded = false;
 function saveTimerData() {
   localStorage.setItem('timerData', JSON.stringify(timerData));
 }
+video.addEventListener('timeupdate', function() {
+  const currentTime = video.currentTime;
+
+  // Show div1 between 45s to 48s
+  if (currentTime >= 45 && currentTime < 48) {
+    redlight.style.display = 'block';
+    greenlight.style.display = 'none';
+  }
+
+  // Show div2 between 48s to 50s
+  if (currentTime >= 48 && currentTime <= 50) {
+    redlight.style.display = 'none';
+    greenlight.style.display = 'block';
+  }
+    // Show div1 between 45s to 48s
+    if (currentTime >= 45 && currentTime < 50) {
+      signalWrapper.style.display = 'block';
+    }
+});
 
 function loadTimerData() {
   const storedData = localStorage.getItem('timerData');
