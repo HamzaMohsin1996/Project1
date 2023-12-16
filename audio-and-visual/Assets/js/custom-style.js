@@ -119,15 +119,15 @@ function handleButtonClick(buttonId) {
 }
 // Event listeners for button clicks
 button1.addEventListener('click', () => {
-  handleButtonClick('Left Turn');
+  handleButtonClick('Left Turn ANV');
 });
 
 button2.addEventListener('click', () => {
-  handleButtonClick('Straight');
+  handleButtonClick('Straight ANV');
 });
 
 button3.addEventListener('click', () => {
-  handleButtonClick('Right Turn');
+  handleButtonClick('Right ANV');
 });
 
 button4.addEventListener('click', () => {
@@ -136,7 +136,7 @@ button4.addEventListener('click', () => {
     button4.style.display !== 'none' &&
     recording
   ) {
-    handleButtonClick('Button 4');
+    handleButtonClick('Stop ANV');
   }
 });
 
