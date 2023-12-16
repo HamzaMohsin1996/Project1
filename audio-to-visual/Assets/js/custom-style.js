@@ -146,16 +146,16 @@ document.addEventListener('keydown', (event) => {
 
   let buttonId = '';
   switch (keyName) {
-    case 'ArrowLeft':
+    case 'a':
       buttonId = 'LeftTurn ATV';
       break;
-    case 'ArrowRight':
+    case 'd':
       buttonId = 'RightLane ATV';
       break;
-    case ' ':
+    case 's':
       buttonId = 'Stop ATV';
       break;
-    case 'ArrowUp':
+    case 'w':
       buttonId = 'Straight ATV';
       break;
     default:
