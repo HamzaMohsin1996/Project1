@@ -119,15 +119,15 @@ function handleButtonClick(buttonId) {
 }
 // Event listeners for button clicks
 button1.addEventListener('click', () => {
-  handleButtonClick('Left Turn');
+  handleButtonClick('Leftturn ATV');
 });
 
 button2.addEventListener('click', () => {
-  handleButtonClick('Straight');
+  handleButtonClick('Straight ATV');
 });
 
 button3.addEventListener('click', () => {
-  handleButtonClick('Right Turn');
+  handleButtonClick('Right Turn ATV');
 });
 
 button4.addEventListener('click', () => {
@@ -136,7 +136,7 @@ button4.addEventListener('click', () => {
     button4.style.display !== 'none' &&
     recording
   ) {
-    handleButtonClick('Button 4');
+    handleButtonClick('Stop ATV');
   }
 });
 
@@ -147,7 +147,7 @@ document.addEventListener('keydown', (event) => {
   let buttonId = '';
   switch (keyName) {
     case 'ArrowLeft':
-      buttonId = 'LeftLane ATV';
+      buttonId = 'LeftTurn ATV';
       break;
     case 'ArrowRight':
       buttonId = 'RightLane ATV';
