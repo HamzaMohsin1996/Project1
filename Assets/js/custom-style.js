@@ -25,15 +25,17 @@ jQuery.noConflict();
       // Add 'active' class to the clicked button
       $(this).addClass('active');
     });
-    
+   
   });
 })(jQuery);
+setTimeout(function(){
+  document.getElementById('myVideo').play();
+},1000);
 const video = document.getElementById('myVideo');
 const button1 = document.getElementById('button1');
 const button2 = document.getElementById('button2');
 const button3 = document.getElementById('button3');
 const button4 = document.getElementById('button4');
-
 const intervals = [
   { start: 7, end: 13.5, label: 'Response Time (7-13.5s)' },
   { start: 45, end: 57, label: 'Response Time (45-57s)' },
@@ -146,16 +148,16 @@ document.addEventListener('keydown', (event) => {
 
   let buttonId = '';
   switch (keyName) {
-    case 'ArrowLeft':
+    case 'a':
       buttonId = 'LeftLane A';
       break;
-    case 'ArrowRight':
+    case 'd':
       buttonId = 'RightLane A';
       break;
-    case ' ':
+    case 's':
       buttonId = 'Stop A';
       break;
-    case 'ArrowUp':
+    case 'w':
       buttonId = 'Straight A';
       break;
     default:
