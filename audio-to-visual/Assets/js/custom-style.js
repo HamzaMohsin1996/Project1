@@ -29,15 +29,15 @@ jQuery.noConflict();
   });
 })(jQuery);
 const video = document.getElementById('myVideo');
-const button1 = document.getElementById('button1');
 const button2 = document.getElementById('button2');
 const button3 = document.getElementById('button3');
 const button4 = document.getElementById('button4');
 
 const intervals = [
-  { start: 7, end: 13.5, label: 'Response Time (7-13.5s)' },
-  { start: 45, end: 57, label: 'Response Time (45-57s)' },
-  { start: 90, end: 115, label: 'Response Time (90-115s)' },
+  { start: 17, end: 24, label: 'Response Time (17-24s)' },
+  { start: 36, end: 42.5, label: 'Response Time (36-42.5s)' },
+  { start: 74, end: 86, label: 'Response Time (74-86s)' },
+  { start: 119, end: 130, label: 'Response Time (119-130s)' },
 ];
 
 let recording = false;
@@ -117,10 +117,7 @@ function handleButtonClick(buttonId) {
     recording = false;
   }
 }
-// Event listeners for button clicks
-button1.addEventListener('click', () => {
-  handleButtonClick('Leftturn ATV');
-});
+
 
 button2.addEventListener('click', () => {
   handleButtonClick('Straight ATV');
@@ -146,9 +143,6 @@ document.addEventListener('keydown', (event) => {
 
   let buttonId = '';
   switch (keyName) {
-    case 'a':
-      buttonId = 'LeftTurn ATV';
-      break;
     case 'd':
       buttonId = 'RightLane ATV';
       break;
